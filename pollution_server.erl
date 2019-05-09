@@ -16,21 +16,7 @@
 
 -record(measurement, {type, value, timestamp}).
 
-
-
-
-
-
-
-
 createMonitor() -> [].
-
-
-
-
-
-
-
 
 addStation(StationName, Coords, []) -> [Station=#station{name=StationName, coordinates=Coords, measurements=[]}];
 addStation(StationName, Coords, [Head | Tail]) ->
@@ -131,6 +117,9 @@ getStationDailyMean(Type, Day, Identifier, [Head | Tail]) ->
     true -> getStationDailyMean(Type, Day, Identifier, Tail)
   end;
 getStationDailyMean(_, _, _, []) -> {"error", "no station found"}.
+
+%Hereby on new shit happens
+
 
 terminate () -> ok.
 
