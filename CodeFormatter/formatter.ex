@@ -1,8 +1,6 @@
 defmodule Formatter do
   @moduledoc false
-
 end
-
 
 defmodule HelloWorld.Endpoint do
   use Phoenix.Endpoint, otp_app: :hello_world
@@ -11,31 +9,36 @@ defmodule HelloWorld.Endpoint do
   #
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
-  plug Plug.Static,
-       at: "/", from: :hello_world, gzip: false,
-       only: ~w(css images js favicon.ico robots.txt)
+  plug(Plug.Static,
+    at: "/",
+    from: :hello_world,
+    gzip: false,
+    only: ~w(css images js favicon.ico robots.txt)
+  )
 
-         # Code reloading can be explicitly enabled under the
-         # :code_reloader configuration of your endpoint.
+  # Code reloading can be explicitly enabled under the
+  # :code_reloader configuration of your endpoint.
   if code_reloading? do
-    plug Phoenix.LiveReloader
-    plug Phoenix.CodeReloader
+    plug(Phoenix.LiveReloader)
+    plug(Phoenix.CodeReloader)
   end
 
-  plug Plug.Logger
+  plug(Plug.Logger)
 
-  plug Plug.Parsers,
-       parsers: [:urlencoded, :multipart, :json],
-       pass: ["*/*"],
-       json_decoder: Poison
+  plug(Plug.Parsers,
+    parsers: [:urlencoded, :multipart, :json],
+    pass: ["*/*"],
+    json_decoder: Poison
+  )
 
-  plug Plug.MethodOverride
-  plug Plug.Head
+  plug(Plug.MethodOverride)
+  plug(Plug.Head)
 
-  plug Plug.Session,
-       store: :cookie,
-       key: "_hello_world_key",
-       signing_salt: "0yg9mHDO"
+  plug(Plug.Session,
+    store: :cookie,
+    key: "_hello_world_key",
+    signing_salt: "0yg9mHDO"
+  )
 
-  plug :router, HelloWorld.Router
+  plug(:router, HelloWorld.Router)
 end
